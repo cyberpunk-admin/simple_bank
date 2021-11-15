@@ -1,5 +1,4 @@
 # Simple Bank
-image[https://www.docker.com/sites/default![img.png](img.png)/files/social/docker_faceb
-
+![img_1.png](img_1.png)
 a go/docker/postgres project to implement a simple bank functions
 
