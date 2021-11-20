@@ -131,7 +131,7 @@ func TestListAccountsAPI(t *testing.T) {
 			},
 			buildStubs: func(store *mockdb.MockStore) {
 				arg := db.ListAccountsByIDParams{
-					Limit: int32(n),
+					Limit:  int32(n),
 					Offset: 0,
 				}
 				store.EXPECT().
@@ -335,7 +335,6 @@ func requireBodyMatchAccount(t *testing.T, body *bytes.Buffer, account db.Accoun
 	require.NoError(t, err)
 	require.Equal(t, account, getAccount)
 }
-
 
 func requireBodyMatchAccounts(t *testing.T, body *bytes.Buffer, accounts []db.Account) {
 	data, err := ioutil.ReadAll(body)
