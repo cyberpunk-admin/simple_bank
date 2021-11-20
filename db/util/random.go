@@ -54,3 +54,10 @@ func RandomMoney() int64 {
 func RandomAmount() int64 {
 	return RandomInt(0, 1000)
 }
+
+// RandomEmail generaete a legal random google email
+func RandomEmail() string {
+	emailname := RandomOwner()
+	emailType := "@gmail.com"
+	return emailname + emailType
+}

@@ -336,6 +336,7 @@ func requireBodyMatchAccount(t *testing.T, body *bytes.Buffer, account db.Accoun
 	require.Equal(t, account, getAccount)
 }
 
+
 func requireBodyMatchAccounts(t *testing.T, body *bytes.Buffer, accounts []db.Account) {
 	data, err := ioutil.ReadAll(body)
 	require.NoError(t, err)
