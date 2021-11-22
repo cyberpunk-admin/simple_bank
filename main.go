@@ -4,7 +4,7 @@ import (
 	"database/sql"
 	"github.com/simplebank/api"
 	db "github.com/simplebank/db/sqlc"
-	"github.com/simplebank/db/util"
+	"github.com/simplebank/util"
 	"log"
 
 	_ "github.com/lib/pq"

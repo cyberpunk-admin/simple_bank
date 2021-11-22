@@ -3,7 +3,7 @@ package db
 import (
 	"context"
 	"database/sql"
-	"github.com/simplebank/db/util"
+	"github.com/simplebank/util"
 	"github.com/stretchr/testify/require"
 	"testing"
 	"time"
@@ -12,8 +12,8 @@ import (
 func CreateRandomAccount(t *testing.T) Account {
 	user := CreateRandomUser(t)
 	arg := CreateAccountParams{
-		Owner: user.UserName,
-		Balance: util.RandomBalance(),
+		Owner:    user.UserName,
+		Balance:  util.RandomBalance(),
 		Currency: util.RandomCurrency(),
 	}
 	account, err := testQueries.CreateAccount(context.Background(), arg)
@@ -71,7 +71,7 @@ func TestListAccounts(t *testing.T) {
 func TestUpdateAccount(t *testing.T) {
 	account1 := CreateRandomAccount(t)
 	arg := UpdateAccountParams{
-		ID: account1.ID,
+		ID:      account1.ID,
 		Balance: util.RandomBalance(),
 	}
 	account2, err := testQueries.UpdateAccount(context.Background(), arg)

@@ -10,7 +10,7 @@ import (
 	"github.com/lib/pq"
 	mockdb "github.com/simplebank/db/mock"
 	db "github.com/simplebank/db/sqlc"
-	"github.com/simplebank/db/util"
+	util2 "github.com/simplebank/util"
 	"github.com/stretchr/testify/require"
 	"io/ioutil"
 	"net/http"
@@ -29,7 +29,7 @@ func (e eqCreateUserParamsMatcher) Matches(x interface{}) bool{
 	if !ok {
 		return false
 	}
-	err := util.CheckPassword(e.password, arg.HashPassword)
+	err := util2.CheckPassword(e.password, arg.HashPassword)
 	if err != nil {
 		return false
 	}
@@ -197,15 +197,15 @@ func TestCreateUserAPI(t *testing.T) {
 }
 
 func RandomUser(t *testing.T) (user db.User, password string) {
-	password = util.RandomString(6)
-	hashPassword, err := util.HashPassword(password)
+	password = util2.RandomString(6)
+	hashPassword, err := util2.HashPassword(password)
 	require.NoError(t, err)
 
 	user = db.User{
-		UserName:     util.RandomOwner(),
-		FullName:     util.RandomOwner(),
+		UserName:     util2.RandomOwner(),
+		FullName:     util2.RandomOwner(),
 		HashPassword: hashPassword,
-		Email:        util.RandomEmail(),
+		Email:        util2.RandomEmail(),
 	}
 	return
 }

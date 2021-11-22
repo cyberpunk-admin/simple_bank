@@ -8,7 +8,7 @@ import (
 	"github.com/golang/mock/gomock"
 	mockdb "github.com/simplebank/db/mock"
 	db "github.com/simplebank/db/sqlc"
-	"github.com/simplebank/db/util"
+	"github.com/simplebank/util"
 	"github.com/stretchr/testify/require"
 	"net/http"
 	"net/http/httptest"

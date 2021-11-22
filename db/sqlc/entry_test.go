@@ -2,7 +2,7 @@ package db
 
 import (
 	"context"
-	"github.com/simplebank/db/util"
+	"github.com/simplebank/util"
 	"github.com/stretchr/testify/require"
 	"testing"
 	"time"
@@ -11,7 +11,7 @@ import (
 func CreateRandomEntry(t *testing.T, A Account) Entry{
 	arg := CreateEntryParams{
 		AccountID: A.ID,
-		Amount: util.RandomMoney(),
+		Amount:    util.RandomMoney(),
 	}
 	entry, err := testQueries.CreateEntry(context.Background(), arg)
 	require.NoError(t, err)
