@@ -2,9 +2,11 @@ package api
 
 import (
 	"database/sql"
+	"errors"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	db "github.com/simplebank/db/sqlc"
+	"github.com/simplebank/token"
 	"net/http"
 )
 
@@ -21,14 +23,28 @@ func (server *Server) createTransfer(ctx *gin.Context) {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
 		return
 	}
-	_, valid := server.validAccount(ctx, req.FromAccountID, req.Currency)
+	fromAccount, valid := server.validAccount(ctx, req.FromAccountID, req.Currency)
 	if !valid {
 		return
 	}
+	authPayload := ctx.MustGet(authorizationPayloadKey).(*token.Payload)
+	if authPayload.Username != fromAccount.Owner {
+		err := errors.New("from account doesn't belong to authenticated user")
+		ctx.JSON(http.StatusUnauthorized, errorResponse(err))
+		return
+	}
+
 	_, valid = server.validAccount(ctx, req.ToAccountID, req.Currency)
 	if !valid {
 		return
 	}
+
+	if fromAccount.Balance < req.Amount {
+		err := errors.New("from account doesn't has enough money for transfer")
+		ctx.JSON(http.StatusBadRequest, errorResponse(err))
+		return
+	}
+
 	arg := db.TransferTXParams{
 		ToAccountID:   req.ToAccountID,
 		FromAccountID: req.FromAccountID,
