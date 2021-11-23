@@ -91,7 +91,7 @@ func TestGetAccountAPI(t *testing.T) {
 			tc.buildStubs(store)
 
 			// start the test server and request
-			server := NewServer(store)
+			server := NewTestServer(t, store)
 			recorder := httptest.NewRecorder()
 
 			url := fmt.Sprintf("/accounts/%d", tc.accountID)
@@ -203,7 +203,7 @@ func TestListAccountsAPI(t *testing.T) {
 			tc.buildStubs(store)
 
 			// start the test server and request
-			server := NewServer(store)
+			server := NewTestServer(t, store)
 			recorder := httptest.NewRecorder()
 
 			url := "/accounts"
@@ -249,7 +249,7 @@ func TestCreateAccountAPI(t *testing.T) {
 
 				store.EXPECT().
 					CreateAccount(gomock.Any(), gomock.Eq(arg)).
-					AnyTimes().
+					Times(1).
 					Return(account, nil)
 			},
 			checkResponse: func(t *testing.T, recorder *httptest.ResponseRecorder) {
@@ -267,8 +267,7 @@ func TestCreateAccountAPI(t *testing.T) {
 
 				store.EXPECT().
 					CreateAccount(gomock.Any(), gomock.Any()).
-					//Times(1).
-					AnyTimes().
+					Times(1).
 					Return(db.Account{}, sql.ErrConnDone)
 			},
 			checkResponse: func(t *testing.T, recorder *httptest.ResponseRecorder) {
@@ -301,7 +300,7 @@ func TestCreateAccountAPI(t *testing.T) {
 			tc.buildStubs(store)
 
 			// start the test server and request
-			server := NewServer(store)
+			server := NewTestServer(t, store)
 			recorder := httptest.NewRecorder()
 
 			// marshal data to json
