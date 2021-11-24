@@ -373,25 +373,12 @@ func TestCreateAccountAPI(t *testing.T) {
 			},
 		},
 		{
-			name: "UnauthorizedUser",
+			name: "InternalError",
 			body: gin.H{
 				"currency": account.Currency,
 			},
 			setupAuth: func(t *testing.T, request *http.Request, tokenMaker token.Maker) {
-			},
-			buildStubs: func(store *mockdb.MockStore) {
-				store.EXPECT().
-					CreateAccount(gomock.Any(), gomock.Any()).
-					Times(0)
-			},
-			checkResponse: func(t *testing.T, recorder *httptest.ResponseRecorder) {
-				require.Equal(t, http.StatusUnauthorized, recorder.Code)
-			},
-		},
-		{
-			name: "InternalError",
-			body: gin.H{
-				"currency": account.Currency,
+				addAuthorization(t, request, tokenMaker, authorizationTypeBearer, user.UserName, time.Minute)
 			},
 			buildStubs: func(store *mockdb.MockStore) {
 
@@ -408,6 +395,9 @@ func TestCreateAccountAPI(t *testing.T) {
 			name: "InvaildCurrency",
 			body: gin.H{
 				"currency": "INVAILD",
+			},
+			setupAuth: func(t *testing.T, request *http.Request, tokenMaker token.Maker) {
+				addAuthorization(t, request, tokenMaker, authorizationTypeBearer, user.UserName, time.Minute)
 			},
 			buildStubs: func(store *mockdb.MockStore) {
 				store.EXPECT().
