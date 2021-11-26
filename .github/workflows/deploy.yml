@@ -11,18 +11,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Alibaba Cloud Container Registry (ACR) Login
-        uses: aliyun/acr-login@v1
+    - name: Alibaba Cloud Container Registry (ACR) Login
+      uses: aliyun/acr-login@v1
       with:
         login-server: https://registry.cn-hangzhou.aliyuncs.com
         username: "${{ secrets.ALI_REGISTRY_USERNAME }}"
-        password: "${{ secrets.ALI_REGISTRY_PASSWORD }}"\
+        password: "${{ secrets.ALI_REGISTRY_PASSWORD }}"
 
-      - name: Build and push image
-        env:
-          ECR_REGISTER: ali_github
-          ECR_REPOSITORY: simple_bank
-          IMAGE_TAG: ${{ github.sha }}
-        run: |
-          docker build -t registry.cn-hangzhou.aliyuncs.com/$ECR_REGISTER/$ECR_REPOSITORY:$IMAGE_TAG .
-          docker push registry.cn-hangzhou.aliyuncs.com/$ECR_REGISTER/$ECR_REPOSITORY:$IMAGE_TAG
+    - name: Build and push image
+      env:
+        ECR_REGISTER: ali_github
+        ECR_REPOSITORY: simple_bank
+        IMAGE_TAG: ${{ github.sha }}
+      run: |
+        docker build -t registry.cn-hangzhou.aliyuncs.com/$ECR_REGISTER/$ECR_REPOSITORY:$IMAGE_TAG .
+        docker push registry.cn-hangzhou.aliyuncs.com/$ECR_REGISTER/$ECR_REPOSITORY:$IMAGE_TAG
