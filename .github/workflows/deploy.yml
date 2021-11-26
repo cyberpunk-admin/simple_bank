@@ -11,6 +11,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+
+    - name: Check out code
+      uses: actions/checkout@v2
+
     - name: Alibaba Cloud Container Registry (ACR) Login
       uses: aliyun/acr-login@v1
       with:
