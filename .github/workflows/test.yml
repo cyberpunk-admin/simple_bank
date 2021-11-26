@@ -1,28 +1,51 @@
-name: Deploy to production
+name: Run unit tests
 
 on:
   push:
     branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
 
-  build:
-    name: Build image
+  test:
+    name: Test
     runs-on: ubuntu-latest
 
-    steps:
-      - name: Alibaba Cloud Container Registry (ACR) Login
-      uses: aliyun/acr-login@v1
-      with:
-        login-server: https://registry.cn-hangzhou.aliyuncs.com
-        username: "${{ secrets.ALI_REGISTRY_USERNAME }}"
-        password: "${{ secrets.ALI_REGISTRY_PASSWORD }}"\
-
-      - name: Build and push image
+    services:
+      postgres:
+        image: postgres:12-alpine
         env:
-          ECR_REGISTER: ali_github
-          ECR_REPOSITORY: simple_bank
-          IMAGE_TAG: ${{ github.sha }}
+          POSTGRES_USER: root
+          POSTGRES_PASSWORD: secret
+          POSTGRES_DB: simple_bank
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+
+      - name: Set up Go 1.x
+        uses: actions/setup-go@v2
+        with:
+          go-version: ^1.17
+        id: go
+
+      - name: Check out code into the Go module directory
+        uses: actions/checkout@v2
+
+      - name: Install golang-migrate
         run: |
-          docker build -t registry.cn-hangzhou.aliyuncs.com/$ECR_REGISTER/$ECR_REPOSITORY:$IMAGE_TAG .
-          docker push registry.cn-hangzhou.aliyuncs.com/$ECR_REGISTER/$ECR_REPOSITORY:$IMAGE_TAG
+          curl -L https://github.com/golang-migrate/migrate/releases/download/v4.14.1/migrate.linux-amd64.tar.gz | tar xvz
+          sudo mv migrate.linux-amd64 /usr/bin/migrate
+          which migrate
+
+      - name: Run migrations
+        run: make migrateup
+
+      - name: Test
+        run: make test
