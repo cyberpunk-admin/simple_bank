@@ -41,3 +41,5 @@ reference .github/workflow test.yml
 ## Push image to Alibaba Cloud Container Registry
 reference .GitHub/workflow deploy.yml
 
+![Simple Bank](https://user-images.githubusercontent.com/65992658/148645581-0d0ee58e-179b-4f20-aa27-b2e8cfefb26d.png)
+
