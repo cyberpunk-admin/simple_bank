@@ -12,56 +12,67 @@ It will provide APIs for the frontend to do following things:
 ## Setup local development
 ### install tool
 * Docker
-
-    `sudo apt-get update sudo apt-get install docker-ce docker-ce-cli containerd.io`
+  ```shell
+  sudo apt-get update sudo apt-get install docker-ce docker-ce-cli containerd.io
+  ```
 * [TablePuls](https://tableplus.com/linux)
 * Migrate
-
-    `curl -L https://github.com/golang-migrate/migrate/releases/download/$version/migrate.$platform-amd64.tar.gz | tar xvz
-    `
+  ```shell
+  curl -L https://github.com/golang-migrate/migrate/releases/download/$version/migrate.$platform-amd64.tar.gz | tar xvz
+  ```
 * Sqlc 
-
-    `go install github.com/kyleconroy/sqlc/cmd/sqlc@latest`
+  ```shell
+  go install github.com/kyleconroy/sqlc/cmd/sqlc@latest
+  ```
 * Gomock
-
-    `go install github.com/golang/mock/mockgen@v1.6.0`
+  ```shell
+  go install github.com/golang/mock/mockgen@v1.6.0  
+  ```
 * Viper 
-* Viper 
+  ```shell
+  go get github.com/spf13/viper
+  ```
 
-    `go get github.com/spf13/viper`
-
-## Setup infrastructure
-    reference Makefile
+### Setup infrastructure
 
 * Build docker compose
-
-    `reference docker-compose`
-
+  ```
+  reference docker-compose
+  ```
 * Unit test with GitHub Action
-
-    `reference .github/workflow test.yml`
-
-* Push image to Alibaba Cloud Container Registry
-
-    `reference .GitHub/workflow deploy.yml`
+  ```
+  reference .github/workflow test.yml
+  ```
+  * Push image to Alibaba Cloud Container Registry
+  ```
+  reference .GitHub/workflow deploy.yml
+  ```
+ 
 
 ## How to generate code
 * Generate schema SQL file with DBML:
-
-    `make db_schema`
+  ```shell
+  make db_schema`
+  ```  
 * Generate SQL CRUD with sqlc:
-
-    `make sqlc`
+  ```shell
+  make sqlc
+  ```
 * Generate DB mock with gomock:
-
-    `make mock`
+  ```shell
+  make mock
+  ```
 * Create a new db migration:
-
-    `migrate create -ext sql -dir db/migration -seq <migration_name>`
+  ```shell
+  migrate create -ext sql -dir db/migration -seq <migration_name>  
+  ```
 ## How to run
 * Run server:
-
-    `make run`
+  ```shell
+  make server
+  ```
 * Run test
+  ```shell
+  make test
+  ```
 
-    `make test`
