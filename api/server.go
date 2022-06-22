@@ -32,7 +32,6 @@ func NewServer(config util.Config, store db.Store) (*Server, error) {
 		tokenMaker: tokenMaker,
 	}
 
-
 	if v, ok := binding.Validator.Engine().(*validator.Validate); ok {
 		err = v.RegisterValidation("currency", validateCurrency)
 		if err != nil {
@@ -49,6 +48,7 @@ func (server *Server) setupRouter() {
 	router := gin.Default()
 	router.POST("/users", server.createUser)
 	router.POST("/users/login", server.loginUser)
+	router.POST("/token/renew_access", server.renewAccessToken)
 
 	authRouter := router.Group("/").Use(AuthMiddleWare(server.tokenMaker))
 

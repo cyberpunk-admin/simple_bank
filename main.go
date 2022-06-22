@@ -10,7 +10,6 @@ import (
 	_ "github.com/lib/pq"
 )
 
-
 func main() {
 	config, err := util.LoadConfig(".")
 	if err != nil {

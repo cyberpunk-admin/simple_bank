@@ -15,4 +15,3 @@ func IsSupport(currency string) bool {
 	}
 	return false
 }
-

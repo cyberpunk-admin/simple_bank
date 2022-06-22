@@ -8,7 +8,7 @@ import (
 	"time"
 )
 
-func CreateRandomEntry(t *testing.T, A Account) Entry{
+func CreateRandomEntry(t *testing.T, A Account) Entry {
 	arg := CreateEntryParams{
 		AccountID: A.ID,
 		Amount:    util.RandomMoney(),
@@ -47,13 +47,13 @@ func TestGetEntry(t *testing.T) {
 
 func TestListEntry(t *testing.T) {
 	account := CreateRandomAccount(t)
-	for i:=0; i < 10; i++ {
+	for i := 0; i < 10; i++ {
 		CreateRandomEntry(t, account)
 	}
 	arg := ListEntryParams{
 		AccountID: account.ID,
-		Limit: 10,
-		Offset: 0,
+		Limit:     10,
+		Offset:    0,
 	}
 	entries, err := testQueries.ListEntry(context.Background(), arg)
 
@@ -66,4 +66,3 @@ func TestListEntry(t *testing.T) {
 		require.Equal(t, account.ID, et.AccountID)
 	}
 }
-

@@ -8,7 +8,7 @@ import (
 	"time"
 )
 
-func CreateRandomTransfer(t *testing.T, from Account, to Account) Transfer{
+func CreateRandomTransfer(t *testing.T, from Account, to Account) Transfer {
 	arg := CreateTransferParams{
 		FromAccountID: from.ID,
 		ToAccountID:   to.ID,
@@ -55,16 +55,16 @@ func TestListTransfer(t *testing.T) {
 	accountFrom := CreateRandomAccount(t)
 	accountTO := CreateRandomAccount(t)
 
-	for i:=0; i < 5; i++ {
+	for i := 0; i < 5; i++ {
 		CreateRandomTransfer(t, accountFrom, accountTO)
 		CreateRandomTransfer(t, accountTO, accountFrom)
 	}
 
 	arg := ListTransferParams{
-		FromAccountID: 	accountFrom.ID,
-		ToAccountID: 	accountFrom.ID,
-		Limit: 5,
-		Offset: 5,
+		FromAccountID: accountFrom.ID,
+		ToAccountID:   accountFrom.ID,
+		Limit:         5,
+		Offset:        5,
 	}
 	transfers, err := testQueries.ListTransfer(context.Background(), arg)
 

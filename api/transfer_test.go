@@ -46,7 +46,7 @@ func TestTransferAPI(t *testing.T) {
 				"amount":          amount,
 				"currency":        util.USD,
 			},
-			setupAuth:    func(t *testing.T, request *http.Request, tokenMaker token.Maker){
+			setupAuth: func(t *testing.T, request *http.Request, tokenMaker token.Maker) {
 				addAuthorization(t, request, tokenMaker, authorizationTypeBearer, user1.UserName, time.Minute)
 			},
 			buildStubs: func(store *mockdb.MockStore) {
@@ -55,8 +55,8 @@ func TestTransferAPI(t *testing.T) {
 
 				arg := db.TransferTXParams{
 					FromAccountID: account1.ID,
-					ToAccountID: account2.ID,
-					Amount: amount,
+					ToAccountID:   account2.ID,
+					Amount:        amount,
 				}
 				store.EXPECT().TransferTx(gomock.Any(), gomock.Eq(arg)).Times(1)
 
@@ -73,7 +73,7 @@ func TestTransferAPI(t *testing.T) {
 				"amount":          amount,
 				"currency":        util.USD,
 			},
-			setupAuth:    func(t *testing.T, request *http.Request, tokenMaker token.Maker){
+			setupAuth: func(t *testing.T, request *http.Request, tokenMaker token.Maker) {
 			},
 			buildStubs: func(store *mockdb.MockStore) {
 				store.EXPECT().GetAccount(gomock.Any(), gomock.Any()).Times(0)
@@ -95,7 +95,7 @@ func TestTransferAPI(t *testing.T) {
 				"amount":          amount,
 				"currency":        util.USD,
 			},
-			setupAuth:    func(t *testing.T, request *http.Request, tokenMaker token.Maker){
+			setupAuth: func(t *testing.T, request *http.Request, tokenMaker token.Maker) {
 				addAuthorization(t, request, tokenMaker, authorizationTypeBearer, "a_unauthorized_user", time.Minute)
 			},
 			buildStubs: func(store *mockdb.MockStore) {
@@ -118,7 +118,7 @@ func TestTransferAPI(t *testing.T) {
 				"amount":          amount,
 				"currency":        util.USD,
 			},
-			setupAuth:    func(t *testing.T, request *http.Request, tokenMaker token.Maker){
+			setupAuth: func(t *testing.T, request *http.Request, tokenMaker token.Maker) {
 				addAuthorization(t, request, tokenMaker, authorizationTypeBearer, user3.UserName, time.Minute)
 			},
 			buildStubs: func(store *mockdb.MockStore) {
@@ -140,7 +140,7 @@ func TestTransferAPI(t *testing.T) {
 				"amount":          amount,
 				"currency":        util.USD,
 			},
-			setupAuth:    func(t *testing.T, request *http.Request, tokenMaker token.Maker){
+			setupAuth: func(t *testing.T, request *http.Request, tokenMaker token.Maker) {
 				addAuthorization(t, request, tokenMaker, authorizationTypeBearer, user1.UserName, time.Minute)
 			},
 			buildStubs: func(store *mockdb.MockStore) {
@@ -162,7 +162,7 @@ func TestTransferAPI(t *testing.T) {
 				"amount":          amount,
 				"currency":        "JPY",
 			},
-			setupAuth:    func(t *testing.T, request *http.Request, tokenMaker token.Maker){
+			setupAuth: func(t *testing.T, request *http.Request, tokenMaker token.Maker) {
 				addAuthorization(t, request, tokenMaker, authorizationTypeBearer, user1.UserName, time.Minute)
 			},
 			buildStubs: func(store *mockdb.MockStore) {
@@ -181,7 +181,7 @@ func TestTransferAPI(t *testing.T) {
 				"amount":          -amount,
 				"currency":        util.USD,
 			},
-			setupAuth:    func(t *testing.T, request *http.Request, tokenMaker token.Maker){
+			setupAuth: func(t *testing.T, request *http.Request, tokenMaker token.Maker) {
 				addAuthorization(t, request, tokenMaker, authorizationTypeBearer, user1.UserName, time.Minute)
 			},
 			buildStubs: func(store *mockdb.MockStore) {
@@ -200,7 +200,7 @@ func TestTransferAPI(t *testing.T) {
 				"amount":          amount,
 				"currency":        util.USD,
 			},
-			setupAuth:    func(t *testing.T, request *http.Request, tokenMaker token.Maker){
+			setupAuth: func(t *testing.T, request *http.Request, tokenMaker token.Maker) {
 				addAuthorization(t, request, tokenMaker, authorizationTypeBearer, user1.UserName, time.Minute)
 			},
 			buildStubs: func(store *mockdb.MockStore) {
@@ -219,7 +219,7 @@ func TestTransferAPI(t *testing.T) {
 				"amount":          amount,
 				"currency":        util.USD,
 			},
-			setupAuth:    func(t *testing.T, request *http.Request, tokenMaker token.Maker){
+			setupAuth: func(t *testing.T, request *http.Request, tokenMaker token.Maker) {
 				addAuthorization(t, request, tokenMaker, authorizationTypeBearer, user1.UserName, time.Minute)
 			},
 			buildStubs: func(store *mockdb.MockStore) {
