@@ -1,8 +1,14 @@
 # Simple Bank
-![img_1.png](readme_resource/docker_logo.png)
-![img_2.png](readme_resource/postgreSQL_logo.png)
-## a go/docker/postgres project to implement a simple bank server
-![img.png](readme_resource/bank_logo.png)
+<img src="readme_resource/docker_logo.png" width=200px>
+<img src="readme_resource/postgreSQL_logo.png" width=200px>
+
+<img src="readme_resource/grpc.png" width=200px>
+<img src="readme_resource/gin.png" width=200px>
+
+<img src="readme_resource/grpc_gateway.svg" width=200px center>
+
+## a project to implement a simple bank server
+<img src="readme_resource/swagger.png" width=50px> [Swagger API Doc](https://app.swaggerhub.com/apis/cyberpunk-admin/simple-bank_api/1.0)
 
 It will provide APIs for the frontend to do following things:
 * Create and manage bank accounts, which are composed of owner’s name, balance, and currency.
