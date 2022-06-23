@@ -18,7 +18,7 @@ func (server *Server) CreateUser(ctx context.Context, req *pb.CreateUserRequest)
 		return nil, status.Errorf(codes.Internal, "failed hash password: %s", err)
 	}
 	arg := db.CreateUserParams{
-		UserName:     req.GetUsername(),
+		UserName:     req.GetUserName(),
 		HashPassword: HashPassword,
 		FullName:     req.GetFullName(),
 		Email:        req.GetEmail(),
