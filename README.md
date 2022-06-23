@@ -1,11 +1,9 @@
 # Simple Bank
-<img src="readme_resource/docker_logo.png" width=200px>
-<img src="readme_resource/postgreSQL_logo.png" width=200px>
+<img src="readme_resource/docker_logo.png" width=300px> <img src="readme_resource/postgreSQL_logo.png" width=300px>
 
-<img src="readme_resource/grpc.png" width=200px>
-<img src="readme_resource/gin.png" width=200px>
+<img src="readme_resource/grpc.png" width=300px> <img src="readme_resource/gin.png" width=300px>
 
-<img src="readme_resource/grpc_gateway.svg" width=200px center>
+<img src="readme_resource/grpc_gateway.svg" width=300px center>
 
 ## a project to implement a simple bank server
 <img src="readme_resource/swagger.png" width=50px> [Swagger API Doc](https://app.swaggerhub.com/apis/cyberpunk-admin/simple-bank_api/1.0)
